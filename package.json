@@ -1,0 +1,22 @@
+{
+  "name": "parkly",
+  "version": "1.0.0",
+  "description": "Aplicación diseñada para administrar entradas y salidas de vehículos en parqueos. Permite registrar tiempos de uso y generar el cobro automáticamente, con soporte para pagos digitales y reportes de control.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'No tests'",
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^5.15.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.15.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
+  }
+}

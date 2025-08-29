@@ -1,0 +1,50 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  OPERATOR
+  USER
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  name     String
+  role     Role     @default(USER)
+  tickets  Ticket[]
+  payments Payment[]
+}
+
+model Rate {
+  id      Int      @id @default(autoincrement())
+  name    String
+  price   Float
+  tickets Ticket[]
+}
+
+model Ticket {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  rate      Rate      @relation(fields: [rateId], references: [id])
+  rateId    Int
+  payment   Payment?
+  createdAt DateTime  @default(now())
+}
+
+model Payment {
+  id       Int      @id @default(autoincrement())
+  ticket   Ticket   @relation(fields: [ticketId], references: [id])
+  ticketId Int      @unique
+  user     User     @relation(fields: [userId], references: [id])
+  userId   Int
+  amount   Float
+  paidAt   DateTime @default(now())
+}
